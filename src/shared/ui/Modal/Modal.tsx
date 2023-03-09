@@ -24,7 +24,7 @@ export const Modal = ({
     <DialogPrimitive.Root open={isOpen} onOpenChange={onClose}>
       <DialogPrimitive.Portal >
         <DialogPrimitive.Overlay
-          className={clsx("fixed inset-0 backdrop-blur-sm bg-black/20 z-[100]")}
+          className={clsx("fixed inset-0 backdrop-blur-sm bg-gray-500/10 z-[100]")}
         />
 
         <DialogPrimitive.Content
