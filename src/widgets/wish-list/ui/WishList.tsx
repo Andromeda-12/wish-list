@@ -1,19 +1,31 @@
 import { useGate, useUnit } from "effector-react";
-import { WishItem, wishModel } from "@/entities/wish";
-import { wishListGate, $isLoading } from "../model";
-import { Button } from "@/shared/ui";
-import { DeleteWishButton } from "@/features/wish/delete-wish";
 import { UpdateWishButton } from "@/features/wish/update-wish";
+import { ToggleDoneWish } from "@/features/wish/done-wish";
+import { WishItem } from "@/entities/wish";
+import {
+  wishListGate,
+  $isLoading,
+  $filteredWishList,
+  $currentFilter,
+} from "../model";
 
 export const WishList = () => {
   useGate(wishListGate);
 
-  const wishList = useUnit(wishModel.$wishList);
+  const filteredWishList = useUnit($filteredWishList);
   const isLoading = useUnit($isLoading);
+  const currentFilter = useUnit($currentFilter);
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (wishList.length == 0)
+  if (filteredWishList.length == 0 && currentFilter !== "none")
+    return (
+      <div className="w-full text-center">
+        Still no wish with <span className="font-semibold">{currentFilter}</span> priority
+      </div>
+    );
+
+  if (filteredWishList.length == 0)
     return (
       <div className="w-full text-center">
         Any wishes? It's time to add them! <span className="text-xl">🌠</span>
@@ -22,10 +34,13 @@ export const WishList = () => {
 
   return (
     <div className="space-y-3 w-full">
-      {wishList.map((wish) => (
+      {filteredWishList.map((wish) => (
         <WishItem
           wish={wish}
-          extra={[<DeleteWishButton wish={wish} />, <UpdateWishButton wish={wish} />]}
+          extra={[
+            <UpdateWishButton wish={wish} />,
+            <ToggleDoneWish wish={wish} />,
+          ]}
           key={wish.id}
         />
       ))}
