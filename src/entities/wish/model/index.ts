@@ -7,7 +7,7 @@ export interface Wish {
   id: string;
   title: string;
   priority: Priority;
-  isHave: boolean;
+  isDone: boolean;
 }
 
 interface CreateWish {
@@ -20,7 +20,7 @@ interface UpdateWish {
   wish: {
     title?: string;
     priority?: Priority;
-    isHave?: boolean;
+    isDone?: boolean;
   };
 }
 
@@ -37,12 +37,13 @@ export const loadWishList = createEvent();
 export const createWish = createEvent<CreateWish>();
 export const removeWish = createEvent<string>();
 export const updateWish = createEvent<UpdateWish>();
+export const toggleDoneWish = createEvent<string>();
 
 export const $wishList = createStore<Wish[]>([])
   .on(createWish, (wishList, newWish) => {
     const wish: Wish = {
       ...newWish,
-      isHave: false,
+      isDone: false,
       id: nanoid(),
     };
 
@@ -55,7 +56,6 @@ export const $wishList = createStore<Wish[]>([])
     const wishIndex = wishList.findIndex(
       (wish) => wish.id === updatedWishData.id
     );
-    console.log(wishIndex);
 
     const updatedWishList = [...wishList];
     updatedWishList[wishIndex] = {
@@ -63,8 +63,18 @@ export const $wishList = createStore<Wish[]>([])
       ...updatedWishData.wish,
     };
 
-    console.log(updatedWishList);
-    
+    return updatedWishList;
+  })
+  .on(toggleDoneWish, (wishList, wishId) => {
+    const wishIndex = wishList.findIndex((wish) => wish.id === wishId);
+
+    const updatedWishList = [...wishList];
+    const currentWish = updatedWishList[wishIndex];
+
+    updatedWishList[wishIndex] = {
+      ...currentWish,
+      isDone: !currentWish.isDone,
+    };
 
     return updatedWishList;
   });
