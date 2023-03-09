@@ -1,6 +1,6 @@
 import * as SelectPrimitive from "@radix-ui/react-select";
-import { Button, Icon } from "@/shared/ui";
 import { clsx } from "clsx";
+import { Button, Icon } from "@/shared/ui";
 
 interface SelectProps {
   values: string[];
@@ -15,7 +15,7 @@ export const Select = ({ values, defaultValue, onChange }: SelectProps) => {
       onValueChange={onChange}
     >
       <SelectPrimitive.Trigger asChild>
-        <Button>
+        <Button className="bg-transparent hover:bg-blue-100/70 border !text-black">
           <SelectPrimitive.Value />
           <SelectPrimitive.Icon className="ml-2">
             <Icon name="chevronDown" size="sm" />

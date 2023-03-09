@@ -20,3 +20,5 @@ export const Input = React.forwardRef<
     </input>
   );
 });
+
+Input.displayName = "Button";

@@ -5,3 +5,4 @@ export * from "./Icon";
 export * from "./Input";
 export * from "./Select";
 export * from "./IconButton";
+export * from "./Checkbox";

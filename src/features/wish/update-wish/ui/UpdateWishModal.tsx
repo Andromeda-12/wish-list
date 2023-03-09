@@ -3,6 +3,7 @@ import { useUnit } from "effector-react";
 import { wishModel } from "@/entities/wish";
 import { Button, Input, Modal, Select } from "@/shared/ui";
 import { $currentWish, updateWish, updateWishModal } from "../model";
+import { DeleteWishButton } from "../../delete-wish";
 
 export const UpdateWishModal = () => {
   const currentWish = useUnit($currentWish);
@@ -47,7 +48,7 @@ export const UpdateWishModal = () => {
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <div className="flex items-center space-x-2 relative">
+          <div className="flex items-center space-x-4 relative">
             <div>Wish priority</div>
 
             <div className="relative">
@@ -60,16 +61,12 @@ export const UpdateWishModal = () => {
           </div>
         </div>
 
-        <div className="w-full flex justify-end space-x-3">
-          <Button type="button" onClick={closeModal}>
-            Cancel
-          </Button>
-          <Button
-            className="bg-transparent hover:bg-blue-400/30 !text-black"
-            type="submit"
-          >
-            Edit
-          </Button>
+        <div className="flex justify-between items-center">
+          <div className="w-full flex justify-end space-x-3">
+            <DeleteWishButton wish={currentWish!} />
+
+            <Button type="submit">Save</Button>
+          </div>
         </div>
       </form>
     </Modal>

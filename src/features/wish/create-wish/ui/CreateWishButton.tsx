@@ -1,5 +1,5 @@
 import { useUnit } from "effector-react";
-import { Button } from "@/shared/ui";
+import { Button, IconButton } from "@/shared/ui";
 import { CreateWishModal } from "./CreateWishModal";
 import { createWishModal } from "../model";
 
@@ -11,7 +11,10 @@ export const CreateWishButton = () => {
     <>
       {isOpen && <CreateWishModal />}
 
-      <Button onClick={openModal}>Add wish</Button>
+      <Button onClick={openModal}>
+        <span className="hidden sm:block">Add wish</span>
+        <span className="sm:hidden">Add</span>
+      </Button>
     </>
   );
 };

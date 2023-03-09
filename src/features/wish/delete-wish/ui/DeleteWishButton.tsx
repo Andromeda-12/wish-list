@@ -1,6 +1,6 @@
 import { useUnit } from "effector-react";
 import { wishModel } from "@/entities/wish";
-import { IconButton } from "@/shared/ui";
+import { Button } from "@/shared/ui";
 import { ConfirmDeletionWish } from "./ConfirmDeletionWish";
 import { confirmModal, setCurrenWish } from "../model";
 
@@ -21,7 +21,12 @@ export const DeleteWishButton = ({ wish }: DeleteWishButtonProps) => {
     <>
       <ConfirmDeletionWish />
 
-      <IconButton iconName="trash" onClick={handleClick} />
+      <Button
+        className="bg-transparent hover:bg-red-100 !text-red-400 hover:text-red-500"
+        onClick={handleClick}
+      >
+        Delete
+      </Button>
     </>
   );
 };
