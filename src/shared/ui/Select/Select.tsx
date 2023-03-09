@@ -18,7 +18,7 @@ export const Select = ({ values, defaultValue, onChange }: SelectProps) => {
         <Button>
           <SelectPrimitive.Value />
           <SelectPrimitive.Icon className="ml-2">
-            <Icon name="chevronDown" />
+            <Icon name="chevronDown" size="sm" />
           </SelectPrimitive.Icon>
         </Button>
       </SelectPrimitive.Trigger>
@@ -37,7 +37,7 @@ export const Select = ({ values, defaultValue, onChange }: SelectProps) => {
             >
               <SelectPrimitive.ItemText>{value}</SelectPrimitive.ItemText>
               <SelectPrimitive.ItemIndicator className="absolute left-2 inline-flex items-center">
-                <Icon name="check" />
+                <Icon name="check" size="sm" />
               </SelectPrimitive.ItemIndicator>
             </SelectPrimitive.Item>
           ))}
